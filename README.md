@@ -2,14 +2,11 @@ Task1
 :) Pack the rails application in a docker container image.
 
 
-Step1)  First created a Dockerfile in the src directory of Rails application
-
-Step2)  Used a Ruby image as the base image
-
-Step3)  Copy the application code into the image
-
-Step4)  Install dependencies using bundle install
-
-Step5)  Expose port 3000 (or whichever port your Rails application runs on)
-
-Step6)  Set the default command to start the Rails server
+:)  Create a Dockerfile in the root directory of your Rails application.
+:)  Use a Ruby 3.0.5 image as the base image.
+:)  Install the necessary dependencies such as Node.js, Yarn, and MySQL client.
+:)  Copy the Rails application files into the container.
+:)  Set the working directory to the Rails application directory.
+:)  Install the gems and run the database migrations.
+:)  Expose port 3000 for the Rails server to listen on.
+:)  Set the command to start the Rails server.
