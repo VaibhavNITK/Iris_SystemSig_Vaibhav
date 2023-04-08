@@ -1,0 +1,73 @@
+version: '3.9'
+services:
+  db:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: myapp
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - myapp_network
+  web:
+    image: myapp
+    command: rails server -b 0.0.0.0
+    environment:
+      RAILS_ENV: production
+      DATABASE_URL: mysql2://myuser:mypassword@db/myapp
+    depends_on:
+      - db
+    networks:
+      - myapp_network
+    expose:
+      - "3000"
+    volumes:
+      - app_data:/myapp
+  web2:
+    image: myapp
+    command: rails server -b 0.0.0.0
+    environment:
+      RAILS_ENV: production
+      DATABASE_URL: mysql2://myuser:mypassword@db/myapp
+    depends_on:
+      - db
+    networks:
+      - myapp_network
+    expose:
+      - "3000"
+    volumes:
+      - app_data:/myapp
+  web3:
+    image: myapp
+    command: rails server -b 0.0.0.0
+    environment:
+      RAILS_ENV: production
+      DATABASE_URL: mysql2://myuser:mypassword@db/myapp
+    depends_on:
+      - db
+    networks:
+      - myapp_network
+    expose:
+      - "3000"
+    volumes:
+      - app_data:/myapp
+  nginx:
+    image: nginx
+    ports:
+      - "8080:80"
+    environment:
+      NGINX_PROXY_PASS: "http://web:3000"
+    volumes:
+      - nginx_config:/etc/nginx/conf.d
+    networks:
+      - myapp_network
+volumes:
+  db_data:
+  app_data:
+  nginx_config:
+networks:
+  myapp_network:
+    driver: bridge
