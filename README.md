@@ -11,6 +11,9 @@ Launch an Nginx container, and configure it as a reverse proxy to the rails appl
 :) Set the network mode to "bridge" for the Nginx service.
 :) Set the environment variable for the Nginx service to point to the Rails service.
 
+Created an Nginx configuration file called myapp.conf in a config/nginx directory of Rails app
+In the docker-compose.yml file, add a volumes section to the nginx service that mounts the config/nginx directory as a volume
+This mounts the config/nginx directory in the current directory as a volume at the /etc/nginx/conf.d directory in the nginx container. This way, we can use a custom Nginx configuration file to configure Nginx for our Rails application.
 
 Launch the Containers
 
