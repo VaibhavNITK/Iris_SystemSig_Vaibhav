@@ -16,3 +16,5 @@ Expose the application port to the host machine at 8080. So you should be able t
 :) Expose port 3306 for the MySQL server to listen on.
 
 :) Set the command to start the MySQL server.
+
+Build the Docker image using the command "docker build -t mydb .".
